@@ -9,6 +9,10 @@
 ## Overview
 
 [//]: # (TODO: Add overview mentioning the purpose of the module, supported REST API versions, and other high-level details.)
+[HubSpot](https://www.hubspot.com/our-story) is a customer management system designed to help bussinesses to managae and streamline their marketing,sales and customer service activities.
+
+`ballerinax-hubspot.crm.commerce.discounts` module is designed to help developers interacting with HubSpot's Commerce Tools, especially in the context of managing discounts in HubSpot's CRM and e-commerce ecosystem. This module allows clients to create, update, retrieve, and manage discount data through [HubSpot API v3](https://developers.hubspot.com/changelog/crm-api-v3-is-generally-available).
+
 
 ## Setup guide
 
