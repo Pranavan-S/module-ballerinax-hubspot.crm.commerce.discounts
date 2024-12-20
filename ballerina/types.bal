@@ -338,11 +338,19 @@ public type AssociatedId record {
 };
 
 # Provides API key configurations needed when communicating with a remote HTTP endpoint.
+# Description. 
+# + private\-app\-legacy - field description  
+# + private\-app - field description
 public type ApiKeysConfig record {|
     string private\-app\-legacy;
     string private\-app;
 |};
 
+# Description.
+#
+# + associations - field description  
+# + objectWriteTraceId - field description  
+# + properties - field description
 public type SimplePublicObjectInputForCreate record {
     PublicAssociationsForObject[] associations;
     string objectWriteTraceId?;
