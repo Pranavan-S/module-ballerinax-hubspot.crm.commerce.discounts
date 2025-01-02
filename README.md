@@ -68,7 +68,7 @@ Navigate to `Auth` tab.
 
    Choose account and authorize the client.
 
-4. Don't panic though `This site can’t be reached` message appear. Look the URL and find the authorization code.
+4. Don't panic though `This site can’t be reached` message appear. Look at the URL and find the authorization code.
    >Example: code=na1-************************S
 
 5. Send a http request to the HubSpot.
