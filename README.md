@@ -8,15 +8,13 @@
 
 ## Overview
 
-[//]: # (TODO: Add overview mentioning the purpose of the module, supported REST API versions, and other high-level details.)
-[HubSpot](https://www.hubspot.com/our-story) is a customer management system designed to help bussinesses to managae and streamline their marketing,sales and customer service activities.
+[HubSpot](https://www.hubspot.com/our-story) is an AI-powered customer relationship management (CRM) platform. 
 
-`ballerinax-hubspot.crm.commerce.discounts` [module](https://developers.hubspot.com/docs/reference/api/crm/commerce/discounts) is designed to help developers interacting with HubSpot's Commerce Tools, especially in the context of managing discounts in HubSpot's CRM and e-commerce ecosystem. This module allows clients to create, update, retrieve, and manage discount data through [HubSpot API v3](https://developers.hubspot.com/changelog/crm-api-v3-is-generally-available).
+The ballerinax/hubspot.crm.commerce.discounts offers APIs to connect and interact with the [discounts](https://developers.hubspot.com/docs/guides/api/crm/commerce/discounts#post-%2Fcrm%2Fv3%2Fobjects%2Fdiscounts) endpoints, specifically based on the [API Docs](https://developers.hubspot.com/docs/reference/api/crm/commerce/discounts)
 
 
 ## Setup guide
 
-[//]: # (TODO: Add detailed steps to obtain credentials and configure the module.)
 You need a [HubSpot developer account](https://developers.hubspot.com/get-started) with an [app](https://developers.hubspot.com/docs/guides/apps/public-apps/overview) to use HubSpot connectors.
 >To create a HubSpot Developer account, [click here](https://app.hubspot.com/signup-hubspot/developers?_ga=2.207749649.2047916093.1734412948-232493525.1734412948&step=landing_page)
 
