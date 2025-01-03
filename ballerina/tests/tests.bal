@@ -49,7 +49,7 @@ isolated function testList() returns error?{
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error response = check hubspotClient->/.get({}, params);
     if response is CollectionResponseSimplePublicObjectWithAssociationsForwardPaging{
         test:assertNotEquals(response.results,[], "No discounts found");
-        test:assertTrue(response.results.length() > 0, "No discounts found");
+        test:assertTrue(response.results.length() < 10, "Limit Exceeded");
         test:assertNotEquals(response.results[0].id, (), "Discount id is not found");
         test:assertNotEquals(response.results[0].properties, (), "Discount properties are not found");
         test:assertNotEquals(response.results[0].properties["hs_type"], (), "Discount label is not found");
