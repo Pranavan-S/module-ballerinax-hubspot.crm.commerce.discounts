@@ -1,5 +1,6 @@
 import ballerina/test;
 import ballerina/oauth2;
+import ballerina/http;
 // import ballerina/io;
 
 
@@ -13,6 +14,15 @@ configurable string discountId= ? ;
 configurable string hs_value= ? ;
 configurable string hs_label= ? ;
 configurable string hs_type= ? ;
+
+// for testUpdate
+configurable string new_hs_value= ? ;
+configurable string new_hs_label= ? ;
+
+// for testDelete
+configurable string delete_discountId= ? ;
+
+
 
 configurable boolean isServerLocal = false;
 
@@ -72,5 +82,40 @@ isolated function testRead() returns error?{
 
     }else {
         test:assertFail("Error occurred while fetching this discount");
+    }
+}
+
+@test:Config{
+    enable: true
+}
+isolated function testUpdate() returns error?{
+    SimplePublicObjectInput payload = {
+        objectWriteTraceId: "1234",
+        properties: {
+            "hs_value": new_hs_value,
+            "hs_label": new_hs_label
+        }
+    };
+
+    SimplePublicObject|error update_response = check hubspotClient->/crm/v3/objects/discounts/[discountId].patch(payload, {});
+    
+    if update_response is SimplePublicObject{
+        test:assertEquals(update_response.properties["hs_value"], new_hs_value, "Discount value is not updated");
+        test:assertEquals(update_response.properties["hs_label"], new_hs_label, "Discount label is not updated");
+    }else {
+        test:assertFail("Error occurred while updating this discount");
+    }
+}
+
+@test:Config{
+    enable: true
+}
+isolated function testDelete() returns error?{
+    http:Response|error delete_response = check hubspotClient->/crm/v3/objects/discounts/[delete_discountId].delete({});
+
+    if delete_response is http:Response{
+        test:assertEquals(delete_response.statusCode, 204, "Discount is not deleted");
+    }else {
+        test:assertFail("Error occurred while deleting this discount");
     }
 }
