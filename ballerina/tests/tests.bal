@@ -7,7 +7,8 @@ import ballerina/http;
 
 configurable string clientId = ?;
 configurable string clientSecret = ?;
-configurable string refreshToken = ?; 
+configurable string refreshToken = ?;
+configurable boolean isServerLocal = false; 
 
 // for testRead
 configurable string discountId= ? ;
@@ -23,9 +24,6 @@ configurable string new_hs_label= ? ;
 configurable string delete_discountId= ? ;
 
 
-
-configurable boolean isServerLocal = false;
-
 OAuth2RefreshTokenGrantConfig auth = {
        clientId: clientId,
        clientSecret: clientSecret,
@@ -34,7 +32,7 @@ OAuth2RefreshTokenGrantConfig auth = {
    };
 
 ConnectionConfig config = {auth : auth};
-final string serviceURL = isServerLocal ? "localhost:8080" : "https://api.hubapi.com";
+final string serviceURL = isServerLocal ? "localhost:8080" : "https://api.hubapi.com/crm/v3/objects/discounts";
 final Client hubspotClient = check new Client(config, serviceURL);
 
 @test:Config{
@@ -48,7 +46,7 @@ isolated function testList() returns error?{
         properties: ["hs_label", "hs_value", "hs_type"]
     };
 
-    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error response = check hubspotClient->/crm/v3/objects/discounts.get({}, params);
+    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error response = check hubspotClient->/.get({}, params);
     if response is CollectionResponseSimplePublicObjectWithAssociationsForwardPaging{
         test:assertNotEquals(response.results,[], "No discounts found");
         test:assertTrue(response.results.length() > 0, "No discounts found");
@@ -70,7 +68,7 @@ isolated function testRead() returns error?{
         properties: ["hs_label", "hs_value", "hs_type"]
     };
     
-    SimplePublicObjectWithAssociations|error response = check hubspotClient->/crm/v3/objects/discounts/[discountId].get({},params);
+    SimplePublicObjectWithAssociations|error response = check hubspotClient->/[discountId].get({},params);
     
     if response is SimplePublicObjectWithAssociations{
         test:assertNotEquals(response.id, (), "Discount id is not found");
@@ -97,7 +95,7 @@ isolated function testUpdate() returns error?{
         }
     };
 
-    SimplePublicObject|error update_response = check hubspotClient->/crm/v3/objects/discounts/[discountId].patch(payload, {});
+    SimplePublicObject|error update_response = check hubspotClient->/[discountId].patch(payload, {});
     
     if update_response is SimplePublicObject{
         test:assertEquals(update_response.properties["hs_value"], new_hs_value, "Discount value is not updated");
@@ -111,7 +109,7 @@ isolated function testUpdate() returns error?{
     enable: true
 }
 isolated function testDelete() returns error?{
-    http:Response|error delete_response = check hubspotClient->/crm/v3/objects/discounts/[delete_discountId].delete({});
+    http:Response|error delete_response = check hubspotClient->/[delete_discountId].delete({});
 
     if delete_response is http:Response{
         test:assertEquals(delete_response.statusCode, 204, "Discount is not deleted");

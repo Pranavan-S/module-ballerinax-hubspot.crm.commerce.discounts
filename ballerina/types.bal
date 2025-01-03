@@ -85,6 +85,13 @@ public type BatchResponseSimplePublicUpsertObjectWithErrors record {
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+public type BatchReadInputSimplePublicObjectId record {
+    string[] propertiesWithHistory;
+    string idProperty?;
+    SimplePublicObjectId[] inputs;
+    string[] properties;
+};
+
 public type BatchResponseSimplePublicUpsertObject record {
     string completedAt;
     string requestedAt?;
@@ -92,13 +99,6 @@ public type BatchResponseSimplePublicUpsertObject record {
     record {|string...;|} links?;
     SimplePublicUpsertObject[] results;
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
-};
-
-public type BatchReadInputSimplePublicObjectId record {
-    string[] propertiesWithHistory;
-    string idProperty?;
-    SimplePublicObjectId[] inputs;
-    string[] properties;
 };
 
 public type ValueWithTimestamp record {
@@ -288,19 +288,13 @@ public type BatchInputSimplePublicObjectBatchInput record {
     SimplePublicObjectBatchInput[] inputs;
 };
 
-public type PreviousPage record {
-    string before;
-    string link?;
-};
-
 public type BatchInputSimplePublicObjectInputForCreate record {
     SimplePublicObjectInputForCreate[] inputs;
 };
 
-# Represents the Queries record for the operation: patch-/crm/v3/objects/discounts/{discountId}
-public type PatchCrmV3ObjectsDiscountsDiscountidQueries record {
-    # The name of a property whose values are unique for this object type
-    string idProperty?;
+public type PreviousPage record {
+    string before;
+    string link?;
 };
 
 public type SimplePublicUpsertObject record {
@@ -312,6 +306,12 @@ public type SimplePublicUpsertObject record {
     string id;
     record {|string...;|} properties;
     string updatedAt;
+};
+
+# Represents the Queries record for the operation: patch-/crm/v3/objects/discounts/{discountId}
+public type PatchCrmV3ObjectsDiscountsDiscountidQueries record {
+    # The name of a property whose values are unique for this object type
+    string idProperty?;
 };
 
 # Represents the Queries record for the operation: post-/crm/v3/objects/discounts/batch/read
@@ -338,19 +338,11 @@ public type AssociatedId record {
 };
 
 # Provides API key configurations needed when communicating with a remote HTTP endpoint.
-# Description. 
-# + private\-app\-legacy - field description  
-# + private\-app - field description
 public type ApiKeysConfig record {|
     string private\-app\-legacy;
     string private\-app;
 |};
 
-# Description.
-#
-# + associations - field description  
-# + objectWriteTraceId - field description  
-# + properties - field description
 public type SimplePublicObjectInputForCreate record {
     PublicAssociationsForObject[] associations;
     string objectWriteTraceId?;
